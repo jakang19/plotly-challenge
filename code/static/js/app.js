@@ -1,12 +1,12 @@
 // Bar chart according to id
-//function getPlot(id) {
+function getPlot(id) {
   // request json data
   d3.json("samples.json").then((data) => {
     console.log(data)
 
     // Define variables
     // Get sample values by id
-    var sampleValues = data.samples.filter(d => d.id.toString() === "940")[0];
+    var sampleValues = data.samples.filter(d => d.id.toString() === id)[0];
     console.log(sampleValues);
 
     // Get top 10 samples
@@ -37,7 +37,7 @@
     var data_bar = [trace_bar];
 
     var layout_bar = {
-      title: "Top 10 OTU for 490",
+      title: `Top 10 OTU for ${id}`,
       yaxis: {
         tickmode: "linear"
       },
@@ -66,7 +66,7 @@
     var data_bubble = [trace_bubble];
 
     var layout_bubble = {
-      title: "Sample 940",
+      title: `Sample ${id}`,
       xaxis: { title: "OTU ID" }
     };
 
@@ -74,7 +74,7 @@
 
   });
 
-//}
+};
 
 // Display sample metadata
 function getData(id){
@@ -92,7 +92,7 @@ function getData(id){
 
         // append id info to panel
         Object.entries(idMetadata).forEach((key) => {
-            demographic.append("h5").text(key[0].toUpperCase() + ": " + key[1] + "\n");
+            demographic.append("h5").text(key[0] + ": " + key[1] + "\n");
         });
     });
 };
@@ -103,4 +103,20 @@ function optionChanged(id){
     getData(id);
 };
 
-// 
+// Inital rendering
+function init() {
+    var dropdown = d3.select("#selDataset");
+
+    d3.json("samples.json").then((data) => {
+        console.log(data)
+
+        data.names.forEach((id) => {
+            dropdown.append("option").text(id).property("value");
+        });
+
+        getPlot(data.names[0]);
+        getData(data.names[0]);
+    });
+};
+
+init();
