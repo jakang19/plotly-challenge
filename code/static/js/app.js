@@ -25,7 +25,7 @@
     console.log(otuLabels);
 
 
-    // Create plot
+    // Create bar chart
     var trace_bar = {
       x: sample,
       y: otuIDs,
@@ -50,6 +50,29 @@
     };
 
     Plotly.newPlot("bar", data_bar, layout_bar);
+
+    // Create bubble chart
+    var trace_bubble = {
+      x: sampleValues.otu_ids,
+      y: sampleValues.sample_values,
+      mode: "markers",
+      marker: {
+        size: sampleValues.sample_values,
+        color: sampleValues.otu_ids
+      },
+      text: sampleValues.otu_labels
+    };
+
+    var data_bubble = [trace_bubble];
+
+    var layout_bubble = {
+      title: "Sample 940",
+      xaxis: { title: "OTU ID" }
+    };
+
+    Plotly.newPlot("bubble", data_bubble, layout_bubble);
+
   });
+
 //}
-//getPlot(940);
+
