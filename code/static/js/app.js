@@ -77,7 +77,7 @@
 //}
 
 // Display sample metadata
-function getMetadata(id){
+function getData(id){
     d3.json("samples.json").then((data) => {
         var metadata = data.metadata;
         console.log(metadata);
@@ -97,3 +97,10 @@ function getMetadata(id){
     });
 };
 
+// Change event
+function optionChanged(id){
+    getPlot(id);
+    getData(id);
+};
+
+// 
