@@ -14,4 +14,4 @@ This repository contains:
 - html file `index.html` to build the web page
 - Directory `static` with the file
   - Javascript `app.js` to build the plots and event listeners
-- The webpage is also to deployed to https://jakang19.github.io/plotly-challenge.github.io/>
+- The webpage is also to deployed to https://jakang19.github.io/plotly-challenge.github.io/
