@@ -76,3 +76,24 @@
 
 //}
 
+// Display sample metadata
+function getMetadata(id){
+    d3.json("samples.json").then((data) => {
+        var metadata = data.metadata;
+        console.log(metadata);
+
+        var idMetadata = metadata.filter(d => d.id.toString() === id)[0];
+
+        // Select demographic panel to put data
+        var demographic = d3.select("#sample-metadata");
+
+        // Drop any existing info in demographic panel
+        demographic.html("");
+
+        // append id info to panel
+        Object.entries(idMetadata).forEach((key) => {
+            demographic.append("h5").text(key[0].toUpperCase() + ": " + key[1] + "\n");
+        });
+    });
+};
+
